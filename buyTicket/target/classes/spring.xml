@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--声明扫描类-->
+    <context:component-scan base-package="com.me.service"></context:component-scan>
+
+    <!--加载外部配置文件-->
+    <context:property-placeholder location="classpath:druid.properties"></context:property-placeholder>
+
+    <!--创建数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <!--创建sqlSessionFactory对象-->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:configloaction.xml"></property>
+        <property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+    </bean>
+
+    <!--sqlSession对象-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="factory"></property>
+        <!--将dao接口对应指定mapper.xml的sql中-->
+        <property name="basePackage" value="com.me.dao"></property>
+    </bean>
+</beans>

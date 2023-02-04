@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.dao.FilmDao">
+    <select id="getList" resultType="com.me.entity.Film">
+        select id,film_id,`name`,director,player,`type`,country,`length`,synopsis,play_time,img_path
+        from film
+    </select>
+
+    <select id="getFilmById" resultType="com.me.entity.Film">
+        select film_id,`name`,director,player,`type`,country,`length`,synopsis,play_time,img_path
+        from film where film_id = #{filmId}
+    </select>
+</mapper>

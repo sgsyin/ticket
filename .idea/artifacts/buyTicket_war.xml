@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="buyTicket:war">
+    <output-path>$PROJECT_DIR$/buyTicket/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>buyTicket</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="buyTicket.war">
+      <element id="artifact" artifact-name="buyTicket:war exploded" />
+    </root>
+  </artifact>
+</component>
